@@ -1,37 +1,49 @@
-import React from 'react';
-import { Table } from 'reactstrap';
+import React, { useState, useEffect } from 'react';
+import { Table, Button } from 'reactstrap';
 
 const Users = (props) => {
-    console.log('test')
+  const [hasError, setErrors] = useState(false);
+  const [users, setUsers] = useState([]);
+
+
+
+  async function fetchData() {
+    const res = await fetch("https://localhost:5001/User/users");
+    res
+      .json()
+      .then(res => setUsers(res))
+      .catch(err => setErrors(err));
+  }
+
+  useEffect(() => {
+    fetchData();
+  },[]);
+
+    let tableRows=users.map(user=>{
+    
+      return(
+      <tr key={user.id}>
+          <th scope="row">{user.id}</th>
+          <td>{user.firstName}</td>
+          <td>{user.lastName}</td>
+          <td>{user.email}</td>
+          <Button outline color="primary" onClick={()=>{console.log(user.id)}}>Редактирай</Button>
+        </tr>
+      )
+    })
+
   return (
     <Table>
       <thead>
         <tr>
-          <th>#</th>
+          <th>Id</th>
           <th>First Name</th>
           <th>Last Name</th>
           <th>Username</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
+       {tableRows}
       </tbody>
     </Table>
   );
