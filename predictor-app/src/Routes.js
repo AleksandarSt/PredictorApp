@@ -1,14 +1,16 @@
-import React from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import React from "react";
+import { Route, Switch, withRouter } from "react-router-dom";
 
-import Users from "./components/users/Users";
+import Users from "./components/Users/Users";
+import Teams from "./components/Teams/Teams";
 
 const Routes = () => {
-    console.log('routers')
+  console.log("routers");
   return (
     <Switch>
       <Route path="/premier-league" />
-      <Route path="/users"  component={Users}/>
+      <Route path="/teams" component={Teams} />
+      <Route path="/users" component={Users} />
       <Route path="/" />
     </Switch>
   );

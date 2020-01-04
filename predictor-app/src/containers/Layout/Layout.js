@@ -1,15 +1,14 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import Menu from '../menu/Menu'
+import Menu from "../../components/Menu/Menu";
 
-import { Container, Row, Col } from 'reactstrap';
-
+import { Container, Row, Col } from "reactstrap";
 
 const Layout = ({ children }) => {
   return (
     <div>
-        <Menu />
+      <Menu />
       <Container>
         <Row>
           <Col>{children}</Col>

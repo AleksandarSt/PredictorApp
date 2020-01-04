@@ -6,12 +6,17 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  Form
+  Form,
+  ModalFooter
 } from "reactstrap";
 import { FaUserEdit } from "react-icons/fa";
 
 const Users = props => {
   const [hasError, setErrors] = useState(false);
+
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
   //const [users, setUsers] = useState([]);
 
   /* async function fetchData() {
@@ -25,48 +30,6 @@ const Users = props => {
   useEffect(() => {
     fetchData();
   }, []); */
-
-  const [tooltipOpen, setTooltipOpen] = useState(false);
-  const [openAddModal, setOpenAddModal] = useState(false);
-  const [openEditModal, setOpenEditModal] = useState(false);
-  const [initialized, setInitialized] = useState(false);
-  const [selectedContact, setSelectedContact] = useState({});
-  //const [contacts, setContacts] = useState([]);
-
-  const openModal = () => {
-    setOpenAddModal(true);
-  };
-  const closeModal = () => {
-    setOpenAddModal(false);
-    setOpenEditModal(false);
-    getData();
-  };
-  const cancelAddModal = () => {
-    setOpenAddModal(false);
-  };
-  const editContact = contact => {
-    setSelectedContact(contact);
-    setOpenEditModal(true);
-  };
-  const cancelEditModal = () => {
-    setOpenEditModal(false);
-  };
-  const getData = async () => {
-    /* const response = await getContacts();
-    setContacts(response.data);
-    setInitialized(true); */
-  };
-  /* const deleteSelectedContact = async id => {
-    await deleteContact(id);
-    getData();
-  }; */
-  useEffect(() => {
-    if (!initialized) {
-      getData();
-    }
-  });
-
-  //const toggle = () => setTooltipOpen(!tooltipOpen);
 
   const users = [
     {
@@ -83,28 +46,31 @@ const Users = props => {
     }
   ];
 
-  let addModal = (
+  /* let addModal = (
     <Modal isOpen={openAddModal}>
       <ModalHeader>Add User</ModalHeader>
       <ModalBody>
         <div>add</div>
       </ModalBody>
     </Modal>
-  );
+  ); */
 
-  let editModal = (
-    <Modal isOpen={openEditModal}>
-      <ModalHeader>Edit User</ModalHeader>
+  /* let editModal = user => (
+    <Modal isOpen={modal} toggle={toggle}>
+      <ModalHeader toggle={toggle}>Edit User</ModalHeader>
       <ModalBody>
-      <Form
-            edit={true}
-            onSave={closeModal.bind(this)}
-            contact={selectedContact}
-            onCancelEdit={cancelEditModal}
-          />
+        <div>{user.firstName}</div>
       </ModalBody>
+      <ModalFooter>
+        <Button color="primary" onClick={toggle}>
+          Do Something
+        </Button>{" "}
+        <Button color="secondary" onClick={toggle}>
+          Cancel
+        </Button>
+      </ModalFooter>
     </Modal>
-  );
+  ); */
 
   let tableRows = users.map(user => {
     return (
@@ -113,15 +79,16 @@ const Users = props => {
         <td>{user.firstName}</td>
         <td>{user.lastName}</td>
         <td>{user.email}</td>
-        <Button
-          id={"edit_" + user.id}
-          outline
-          color="primary"
-          onClick={editContact.bind(this, user)}
-        >
-          <FaUserEdit />
-        </Button>
-        {/* <Tooltip
+        <td>
+          <Button
+            id={"edit_" + user.id}
+            outline
+            color="primary"
+            onClick={toggle} //.bind(this, user)}
+          >
+            <FaUserEdit />
+          </Button>
+          {/* <Tooltip
           placement="top"
           isOpen={tooltipOpen}
           toggle={toggle}
@@ -129,14 +96,15 @@ const Users = props => {
         >
           Редактирай {user.firstName} {user.lastName}
         </Tooltip> */}
+        </td>
       </tr>
     );
   });
 
   return (
     <>
-      {addModal}
-      {editModal}
+      {/* {addModal} */}
+      {/* editModal */}
       <Table>
         <thead>
           <tr>
