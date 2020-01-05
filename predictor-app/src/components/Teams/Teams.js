@@ -1,14 +1,5 @@
 import React, { Component } from "react";
-import {
-  Table,
-  Button,
-  Tooltip,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  Form,
-  ModalFooter
-} from "reactstrap";
+import { Table, Button } from "reactstrap";
 import { FaEdit } from "react-icons/fa";
 
 class Teams extends Component {

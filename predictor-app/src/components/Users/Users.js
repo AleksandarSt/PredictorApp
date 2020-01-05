@@ -1,41 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Table,
   Button,
-  Tooltip,
   Modal,
   ModalHeader,
   ModalBody,
   Form,
   ModalFooter,
-  Col,
   FormGroup,
   Label,
   Input
 } from "reactstrap";
 import { FaUserEdit } from "react-icons/fa";
 
-const Users = props => {
-  const [modal, setModal] = useState(false);
-  const [selectedUser, setSelectedUser] = useState({});
-  const [user, saveUser] = useState({});
-
-  const toggle = () => setModal(!modal);
-  //const [users, setUsers] = useState([]);
-
-  /* async function fetchData() {
-    const res = await fetch("https://localhost:5001/User/users");
-    res
-      .json()
-      .then(res => setUsers(res))
-      .catch(err => setErrors(err));
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []); */
-
-  const users = [
+const Users = () => {
+  const usersDefault = [
     {
       id: 1,
       firstName: "peshko",
@@ -55,6 +34,26 @@ const Users = props => {
       email: "test@abv.bg"
     }
   ];
+
+  const [modal, setModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState({});
+  const [users, setUsers] = useState(usersDefault);
+
+  const toggle = () => setModal(!modal);
+
+  //const [users, setUsers] = useState([]);
+
+  /* async function fetchData() {
+    const res = await fetch("https://localhost:5001/User/users");
+    res
+      .json()
+      .then(res => setUsers(res))
+      .catch(err => setErrors(err));
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []); */
 
   /* let addModal = (
     <Modal isOpen={openAddModal}>
@@ -88,9 +87,19 @@ const Users = props => {
     setModal(true);
   };
 
-  const saveEditedUser = event => {
+  const saveEditedUser = (event, editedUserId) => {
     event.preventDefault();
-    //saveUser(editedUser); todo
+    const formData = new FormData(event.target);
+    let editedUser = { id: editedUserId };
+    for (var pair of formData.entries()) {
+      editedUser[pair[0]] = pair[1];
+    }
+    const newUsers = [...users];
+    const indexOfEditedUser = newUsers.findIndex(u => u.id === editedUserId);
+    newUsers[indexOfEditedUser] = editedUser;
+    console.log(editedUser);
+    console.log(newUsers);
+    setUsers(newUsers);
     setModal(false);
   };
 
@@ -100,7 +109,7 @@ const Users = props => {
         Редактирай потребител № {selectedUser.id}
       </ModalHeader>
       <ModalBody>
-        <Form onSubmit={saveEditedUser}>
+        <Form onSubmit={e => saveEditedUser(e, selectedUser.id)}>
           <FormGroup>
             <Label for="firstName">First Name</Label>
             <Input
@@ -125,7 +134,7 @@ const Users = props => {
             <Label for="email">Email</Label>
             <Input
               type="email"
-              name="Email"
+              name="email"
               id="email"
               placeholder="Email"
               defaultValue={selectedUser.email}
