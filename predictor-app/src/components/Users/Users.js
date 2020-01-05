@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Table,
   Button,
@@ -14,7 +14,7 @@ import {
 import { FaUserEdit } from "react-icons/fa";
 
 const Users = () => {
-  const usersDefault = [
+  /* const usersDefault = [
     {
       id: 1,
       firstName: "peshko",
@@ -33,27 +33,27 @@ const Users = () => {
       lastName: "Prestypnik",
       email: "test@abv.bg"
     }
-  ];
+  ]; */
 
   const [modal, setModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
-  const [users, setUsers] = useState(usersDefault);
+  const [users, setUsers] = useState([]);
 
   const toggle = () => setModal(!modal);
 
   //const [users, setUsers] = useState([]);
 
-  /* async function fetchData() {
+  async function fetchData() {
     const res = await fetch("https://localhost:5001/User/users");
     res
       .json()
       .then(res => setUsers(res))
-      .catch(err => setErrors(err));
+      .catch(err => alert("error")); //setErrors(err));
   }
 
   useEffect(() => {
     fetchData();
-  }, []); */
+  }, []);
 
   /* let addModal = (
     <Modal isOpen={openAddModal}>
