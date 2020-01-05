@@ -7,14 +7,18 @@ import {
   ModalHeader,
   ModalBody,
   Form,
-  ModalFooter
+  ModalFooter,
+  Col,
+  FormGroup,
+  Label,
+  Input
 } from "reactstrap";
 import { FaUserEdit } from "react-icons/fa";
 
 const Users = props => {
-  const [hasError, setErrors] = useState(false);
-
   const [modal, setModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState({});
+  const [user, saveUser] = useState({});
 
   const toggle = () => setModal(!modal);
   //const [users, setUsers] = useState([]);
@@ -40,8 +44,14 @@ const Users = props => {
     },
     {
       id: 2,
-      firstName: "peshko",
+      firstName: "Richi",
       lastName: "petkov",
+      email: "test@abv.bg"
+    },
+    {
+      id: 3,
+      firstName: "Debeliq",
+      lastName: "Prestypnik",
       email: "test@abv.bg"
     }
   ];
@@ -72,6 +82,71 @@ const Users = props => {
     </Modal>
   ); */
 
+  const editUser = user => {
+    setSelectedUser(user);
+    //setOpenEditModal(true);
+    setModal(true);
+  };
+
+  const saveEditedUser = event => {
+    event.preventDefault();
+    //saveUser(editedUser); todo
+    setModal(false);
+  };
+
+  let testmodal = (
+    <Modal isOpen={modal} toggle={toggle}>
+      <ModalHeader toggle={toggle}>
+        Редактирай потребител № {selectedUser.id}
+      </ModalHeader>
+      <ModalBody>
+        <Form onSubmit={saveEditedUser}>
+          <FormGroup>
+            <Label for="firstName">First Name</Label>
+            <Input
+              type="text"
+              name="firstName"
+              id="firstName"
+              placeholder="First Name"
+              defaultValue={selectedUser.firstName}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="firstName">Last Name</Label>
+            <Input
+              type="text"
+              name="lastName"
+              id="lastName"
+              placeholder="Last Name"
+              defaultValue={selectedUser.lastName}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="email">Email</Label>
+            <Input
+              type="email"
+              name="Email"
+              id="email"
+              placeholder="Email"
+              defaultValue={selectedUser.email}
+            />
+          </FormGroup>
+          <Button
+            type="submit"
+            color="primary"
+            //onClick={}
+          >
+            Save
+          </Button>{" "}
+          <Button color="secondary" onClick={toggle}>
+            Cancel
+          </Button>
+        </Form>
+      </ModalBody>
+      <ModalFooter></ModalFooter>
+    </Modal>
+  );
+
   let tableRows = users.map(user => {
     return (
       <tr key={user.id}>
@@ -84,7 +159,8 @@ const Users = props => {
             id={"edit_" + user.id}
             outline
             color="primary"
-            onClick={toggle} //.bind(this, user)}
+            //onClick={toggle} //.bind(this, user)}
+            onClick={editUser.bind(this, user)}
           >
             <FaUserEdit />
           </Button>
@@ -105,13 +181,14 @@ const Users = props => {
     <>
       {/* {addModal} */}
       {/* editModal */}
+      {testmodal}
       <Table>
         <thead>
           <tr>
             <th>Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
+            <th>Име</th>
+            <th>Фамилия</th>
+            <th>Email</th>
           </tr>
         </thead>
         <tbody>{tableRows}</tbody>
