@@ -8,7 +8,7 @@ import { createStore } from "redux";
 import Layout from "./containers/Layout/Layout";
 import Routes from "./Routes";
 
-function todos(state = [], action) {
+function rootReducer(state = { test: false }, action) {
   switch (action.type) {
     case "ADD_TODO":
       return state.concat([action.text]);
@@ -17,10 +17,13 @@ function todos(state = [], action) {
   }
 }
 
-const store = createStore(todos, ["Use Redux"]);
+const store = createStore(
+  rootReducer /* preloadedState, */,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 const App = () => {
-  console.log("app");
+  /* console.log("app"); */
   return (
     <Provider store={store}>
       <Router>

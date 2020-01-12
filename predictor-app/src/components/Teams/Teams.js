@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Table, Button } from "reactstrap";
 import { FaEdit } from "react-icons/fa";
 
+import TeamRow from "./TeamRow";
+
 const Teams = () => {
   /* const teams = [
       {
@@ -32,36 +34,13 @@ const Teams = () => {
     fetchTeams();
   }, []);
 
-  let tableRows = teams.map(team => {
-    return (
-      <tr key={team.id}>
-        <th scope="row">{team.id}</th>
-        <td>{team.name}</td>
-        <td>{team.displayName}</td>
-        <td>
-          <Button
-            id={"edit_" + team.id}
-            outline
-            color="primary"
-            //onClick={toggle} //.bind(this, user)}
-          >
-            <FaEdit />
-          </Button>
-          {/* <Tooltip
-              placement="top"
-              isOpen={tooltipOpen}
-              toggle={toggle}
-              target={"edit_" + user.id}
-            >
-              Редактирай {user.firstName} {user.lastName}
-            </Tooltip> */}
-        </td>
-      </tr>
-    );
-  });
+  let tableRows = teams.map(team => <TeamRow key={team.id} team={team} />);
 
   return (
     <>
+      <Button color="danger" className="mr-1">
+        Създай нов отбор
+      </Button>
       <Table>
         <thead>
           <tr>
@@ -71,7 +50,7 @@ const Teams = () => {
           </tr>
         </thead>
         <tbody>{tableRows}</tbody>
-      </Table>{" "}
+      </Table>
     </>
   );
 };
