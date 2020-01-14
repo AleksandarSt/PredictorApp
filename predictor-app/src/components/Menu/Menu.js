@@ -29,6 +29,12 @@ const Menu = props => {
             <NavItem>
               <NavLink href="/premier-league">Висша лига</NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink href="/champions-league">Шампионска лига</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/euro-2020">Европейско 2020</NavLink>
+            </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
                 Администрация
@@ -46,7 +52,6 @@ const Menu = props => {
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
-            {/*  */}
           </Nav>
           <NavbarText>ВХОД</NavbarText>
         </Collapse>

@@ -10,6 +10,8 @@ const Routes = () => {
   return (
     <Switch>
       <Route path="/premier-league" component={PremierLeague} />
+      <Route path="/champions-league" component={PremierLeague} />
+      <Route path="/euro-2020" component={PremierLeague} />
       <Route path="/teams" component={Teams} />
       <Route path="/users" component={Users} />
       <Route path="/" />
