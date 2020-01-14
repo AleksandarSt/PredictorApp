@@ -34,7 +34,9 @@ const Teams = () => {
     fetchTeams();
   }, []);
 
-  let tableRows = teams.map(team => <TeamRow key={team.id} team={team} />);
+  let tableRows = teams.map(team => (
+    <TeamRow key={team.id} team={team} fetchTeams={fetchTeams} />
+  ));
 
   return (
     <>

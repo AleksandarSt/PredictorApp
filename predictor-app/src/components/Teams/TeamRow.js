@@ -3,7 +3,7 @@ import { Button } from "reactstrap";
 import { FaEdit } from "react-icons/fa";
 import EditModal from "./Modals/EditModal";
 
-const TeamRow = ({ team }) => {
+const TeamRow = ({ team, fetchTeams }) => {
   const [editModal, setEditModal] = useState(false);
   const toggleEditModal = () => setEditModal(!editModal);
 
@@ -24,6 +24,7 @@ const TeamRow = ({ team }) => {
             team={team}
             toggleEditModal={toggleEditModal}
             editModal={editModal}
+            fetchTeams={fetchTeams}
           />
         </Button>
         {/* <Tooltip

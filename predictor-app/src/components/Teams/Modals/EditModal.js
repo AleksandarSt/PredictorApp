@@ -10,7 +10,7 @@ import {
   Input
 } from "reactstrap";
 
-const EditModal = ({ team, editModal, toggleEditModal }) => {
+const EditModal = ({ team, editModal, toggleEditModal, fetchTeams }) => {
   /* const [editModal, setEditModal] = useState(false);
   const toggleEditModal = () => setEditModal(!editModal); */
   const [displayName, setDisplayName] = useState(team.displayName);
@@ -37,7 +37,10 @@ const EditModal = ({ team, editModal, toggleEditModal }) => {
         displayName: displayName
       })
     })
-      .then(toggleEditModal)
+      .then(() => {
+        fetchTeams();
+        toggleEditModal();
+      })
       .catch(err => console.log(err)); //setErrors(err));
   }
 
