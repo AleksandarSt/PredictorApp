@@ -1,50 +1,48 @@
 import React, { useState } from "react";
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
   FormGroup,
   Label,
-  Input
+  Input,
+  Button
 } from "reactstrap";
 
-const EditTeamModal = ({ team, editModal, toggleEditModal, fetchTeams }) => {
-  const [displayName, setDisplayName] = useState(team.displayName);
+const AddTeamModal = ({ addTeamModal, toggleAddTeamModal, fetchTeams }) => {
+  const [displayName, setDisplayName] = useState();
   const displayNameChangeHandler = event => {
     const newValue = event.target.value;
     setDisplayName(newValue);
   };
 
-  const [teamName, setTeamName] = useState(team.name);
+  const [teamName, setTeamName] = useState();
   const teamNameChangeHandler = event => {
     const newValue = event.target.value;
     setTeamName(newValue);
   };
 
-  const updateTeam = async () => {
-    await fetch("https://localhost:5001/Team/update-team", {
+  const addTeam = async () => {
+    await fetch("https://localhost:5001/Team/add-team", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        id: team.id,
+        id: 0,
         name: teamName,
         displayName: displayName
       })
     })
       .then(() => {
         fetchTeams();
-        toggleEditModal();
+        toggleAddTeamModal();
       })
-      .catch(err => console.log(err)); //setErrors(err));
+      .catch(err => console.log(err));
   };
 
   return (
-    <Modal isOpen={editModal} toggle={toggleEditModal}>
-      <ModalHeader toggle={toggleEditModal}>
-        Редактирай {team.displayName}
-      </ModalHeader>
+    <Modal isOpen={addTeamModal} toggle={toggleAddTeamModal}>
+      <ModalHeader toggle={toggleAddTeamModal}>Създай отбор</ModalHeader>
       <ModalBody>
         <FormGroup>
           <Label for="teamName">Team Name</Label>
@@ -70,10 +68,16 @@ const EditTeamModal = ({ team, editModal, toggleEditModal, fetchTeams }) => {
         </FormGroup>
       </ModalBody>
       <ModalFooter>
-        <Button color="primary" onClick={updateTeam}>
+        <Button
+          color="primary"
+          onClick={() => {
+            addTeam();
+            toggleAddTeamModal();
+          }}
+        >
           Запази
         </Button>{" "}
-        <Button color="secondary" onClick={toggleEditModal}>
+        <Button color="secondary" onClick={toggleAddTeamModal}>
           Откажи
         </Button>
       </ModalFooter>
@@ -81,14 +85,4 @@ const EditTeamModal = ({ team, editModal, toggleEditModal, fetchTeams }) => {
   );
 };
 
-/* const mapStateToProps = state => {
-  return {
-    token: getToken(state),
-  };
-}; */
-
-/* const mapDispatchToProps = {
-  // loadMenus: loadMenusRequest,
-}; */
-
-export default /* connect(mapStateToProps, mapDispatchToProps)( */ EditTeamModal /* ) */;
+export default AddTeamModal;

@@ -2,22 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Table, Button } from "reactstrap";
 
 import TeamRow from "./TeamRow";
+import AddTeamModal from "./Modals/AddTeamModal";
 
 const Teams = () => {
-  /* const teams = [
-      {
-        id: 1,
-        teamName: "Manchester United"
-      },
-      {
-        id: 2,
-        teamName: "Arsenal"
-      },
-      {
-        id: 3,
-        teamName: "Manchester City"
-      }
-    ]; */
+  const [addTeamModal, setAddTeamModal] = useState(false);
+  const toggleAddTeamModal = () => setAddTeamModal(!addTeamModal);
 
   const [teams, setTeams] = useState([]);
 
@@ -39,9 +28,14 @@ const Teams = () => {
 
   return (
     <>
-      <Button color="danger" className="mr-1">
+      <Button color="danger" className="mr-2" onClick={toggleAddTeamModal}>
         Създай нов отбор
       </Button>
+      <AddTeamModal
+        addTeamModal={addTeamModal}
+        toggleAddTeamModal={toggleAddTeamModal}
+        fetchTeams={fetchTeams}
+      />
       <Table>
         <thead>
           <tr>
