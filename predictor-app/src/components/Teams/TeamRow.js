@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "reactstrap";
 import { FaEdit } from "react-icons/fa";
-import EditModal from "./Modals/EditModal";
+import EditModal from "./Modals/EditTeamModal";
 
 const TeamRow = ({ team, fetchTeams }) => {
   const [editModal, setEditModal] = useState(false);

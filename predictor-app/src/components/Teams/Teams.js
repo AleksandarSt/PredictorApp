@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button } from "reactstrap";
-import { FaEdit } from "react-icons/fa";
 
 import TeamRow from "./TeamRow";
 
@@ -27,7 +26,7 @@ const Teams = () => {
     res
       .json()
       .then(res => setTeams(res))
-      .catch(err => alert("error")); //setErrors(err));
+      .catch(() => alert("error")); //setErrors(err));
   }
 
   useEffect(() => {

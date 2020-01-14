@@ -10,7 +10,7 @@ import {
   Input
 } from "reactstrap";
 
-const EditModal = ({ team, editModal, toggleEditModal, fetchTeams }) => {
+const EditTeamModal = ({ team, editModal, toggleEditModal, fetchTeams }) => {
   /* const [editModal, setEditModal] = useState(false);
   const toggleEditModal = () => setEditModal(!editModal); */
   const [displayName, setDisplayName] = useState(team.displayName);
@@ -28,7 +28,7 @@ const EditModal = ({ team, editModal, toggleEditModal, fetchTeams }) => {
   };
 
   async function updateTeam() {
-    const res = await fetch("https://localhost:5001/Team", {
+    await fetch("https://localhost:5001/Team", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -107,4 +107,4 @@ const EditModal = ({ team, editModal, toggleEditModal, fetchTeams }) => {
   // loadMenus: loadMenusRequest,
 }; */
 
-export default /* connect(mapStateToProps, mapDispatchToProps)( */ EditModal /* ) */;
+export default /* connect(mapStateToProps, mapDispatchToProps)( */ EditTeamModal /* ) */;
