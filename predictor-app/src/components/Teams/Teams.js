@@ -42,6 +42,7 @@ const Teams = () => {
             <th>Id</th>
             <th>Име</th>
             <th>Презентационно име</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>{tableRows}</tbody>

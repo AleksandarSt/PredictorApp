@@ -3,12 +3,13 @@ import { Route, Switch, withRouter } from "react-router-dom";
 
 import Users from "./components/Users/Users";
 import Teams from "./components/Teams/Teams";
+import PremierLeague from "./components/PremierLeague/PremierLeague";
 
 const Routes = () => {
   console.log("routers");
   return (
     <Switch>
-      <Route path="/premier-league" />
+      <Route path="/premier-league" component={PremierLeague} />
       <Route path="/teams" component={Teams} />
       <Route path="/users" component={Users} />
       <Route path="/" />
