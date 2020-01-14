@@ -1,9 +1,19 @@
 import React from "react";
-import { Table, Input } from "reactstrap";
+import { Table, Input, FormGroup, Label } from "reactstrap";
 
 const PremierLeague = () => {
   return (
     <>
+      <FormGroup>
+        <Label for="exampleSelect">Кръг</Label>
+        <Input className="w-25" type="select" name="select" id="exampleSelect">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </Input>
+      </FormGroup>
       <Table>
         <thead>
           <tr>
